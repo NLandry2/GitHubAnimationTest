@@ -9,10 +9,19 @@ public class SoundScript : MonoBehaviour
     public AudioClip musicClipTwo;
 
     public AudioSource musicSource;
+
+    Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
+      anim = GetComponent<Animator>();
+        if (Input.GetKeyDown(KeyCode.Escape))
+          {
+             Application.Quit();
+          } 
         
+
     }
 
     // Update is called once per frame
@@ -22,12 +31,14 @@ public class SoundScript : MonoBehaviour
         {
           musicSource.clip = musicClipOne;
           musicSource.Play();
+          anim.SetInteger("State", 1);
 
          }
 
      if (Input.GetKeyUp(KeyCode.W))
         {
           musicSource.Stop();
+          anim.SetInteger("State", 0);
 
          }
 
@@ -35,12 +46,13 @@ public class SoundScript : MonoBehaviour
         {
           musicSource.clip = musicClipTwo;
           musicSource.Play();
+          anim.SetInteger("State", 2);
          }
 
      if (Input.GetKeyUp(KeyCode.R))
         {
           musicSource.Stop();
-
+          anim.SetInteger("State", 0);
          }
 
      if (Input.GetKeyDown(KeyCode.L))
@@ -52,5 +64,10 @@ public class SoundScript : MonoBehaviour
         {
           musicSource.loop = false;
         }
+      if (Input.GetKeyDown(KeyCode.Escape))
+        {
+             Application.Quit();
+        } 
+
     }
 }
